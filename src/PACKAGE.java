@@ -1,46 +1,44 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-
-public class PACKAGE {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        Integer n = Integer.valueOf(in.nextLine());
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            int a = in.nextInt();
-            int b = in.nextInt();
-            for (int j = 0; j < b; j++)
-                list.add(a);
-            in.nextLine();
-        }
-        Collections.sort(list);
-        System.out.println(list.get(in.nextInt() - 1));
-    }
-}
 //#include <iostream>
 //#include <bits/stdc++.h>
 //        using namespace std;
 //
-//        int main() {
-//        int N;
+//class Package {
+//    public:
+//    long weight;
+//    long count;
+//    bool operator > (const Package& p) const
+//    {
+//        return (weight > p.weight);
+//    }
+//};
 //
+//int main() {
+//        long N;
 //
 //        cin >> N;
-//        vector<long> v;
+//        vector<Package> v;
 //
-//        for (int i = 0; i < N; i++) {
+//        for (long i = 0; i < N; i++) {
 //        long a, b;
 //        cin >> a >> b;
-//        for( int j = 0;j<b;j++){
-//        v.push_back(a);
+//        Package p;
+//        p.weight=a;
+//        p.count=b;
+//        v.push_back(p);
+//        fflush(stdin);
 //        }
-//        }
-//        sort(v.begin(), v.end());
-//        int c;
+//        sort(v.begin(), v.end(),greater<Package>());
+//        long c;
 //        cin>>c;
-//        cout<<v[c-1];
+//        while(c>0){
+//        Package temp = v.back();
+//        v.pop_back();
+//        c-=temp.count;
+//        if(c<=0){
+//        cout<<temp.weight;
+//        break;
 //        }
-
+//        }
+//        }
+//
+//
