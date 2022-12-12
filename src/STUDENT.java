@@ -4,32 +4,84 @@ import java.util.Scanner;
 
 public class STUDENT {
 
+    public static long tinhGiaithua(int n){
+
+        long ketqua=1;
+        int i;
+        for(i=2;i<=n;i++)
+        {
+            ketqua*=i;
+        }
+        return ketqua;
+    }
+    public static long tinhTohop(int k, int n){
+        return tinhGiaithua(n)/(tinhGiaithua(k)*tinhGiaithua(n-k));
+    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         Integer n = Integer.valueOf(in.nextLine());
         String[] student = in.nextLine().split(" ");
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
+
         for (int i = 0; i < n; i++) {
-            Integer rank = Integer.valueOf(student[i]);
-            if (map.containsKey(rank)) {
-                Integer count = map.get(rank);
-                count+=1;
-                map.put(rank, count);
-            } else map.put(rank, 1);
+            if(map.get(student[i])!=null)
+                map.put(student[i],map.get(student[i])+1);
+            else map.put(student[i],1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            long result = 0;
+            for (Map.Entry<String, Integer> item : map.entrySet()) {
+                if (student[i].equalsIgnoreCase(item.getKey())) {
+                    if (n > 2)
+                        result += tinhTohop(2, item.getValue() - 1);
+                }
+                else if(item.getValue()>=2) result += tinhTohop(2, item.getValue());
+            }
+            System.out.println(result);
         }
 
     }
 }
+
+//
 //#include <iostream>
 //#include <bits/stdc++.h>
 //        using namespace std;
 //
 //class Student {
-//    public:
+//    private:
 //    int rank;
 //    int count;
+//    long result;
+//    bool isCal=0;
+//    public:
+//    int getRank(){
+//        return rank;}
+//    int getCount(){
+//        return count;}
+//    long getResult(){
+//        return result;
+//    }
+//    bool getIsCal(){
+//        return isCal;}
+//
+//    void setRank(int x){
+//        rank = x;
+//    }
+//    void setCount(int x){
+//        count = x;
+//    }
+//    void setResult(long x){
+//        result = x;}
+//    void setIsCal(bool x){
+//        isCal = x;}
+//
+//    bool operator<(Student const &p) const {
+//        return getRank() < p.getRank() || (getRank() == p.getRank() && getCount() < p.getCount());
+//    }
 //};
 //
 //int C(int k, int n) {
@@ -38,44 +90,54 @@ public class STUDENT {
 //        return C(k - 1, n - 1) + C(k, n - 1);
 //        }
 //
+//        long calResult(set<Student> set,int rank ){
+//        long result = 0;
+//        for(Student item: set){
+//        cout<<"-----"<<item.getCount()<<endl;
+//        if(rank==item.getRank()){
+//        if(item.getCount()>2)
+//        result += C(2,item.getCount()-1);
+//        }
+//        else if(item.getCount()>1)
+//        result += C(2,item.getCount());
+//        }
+//        //cout<<endl<<"-------"<<endl<<result<<endl<<"-------"<<endl;
+//        return result;
+//        }
+//
 //        int main() {
 //        int N;
 //        cin >> N;
-//        vector<Student> v;
-//        fflush(stdin);
+//
+//        set<Student> set;
+//        vector<int> num;
+//
+//
 //        for(int i =0 ;i<N;i++){
 //        int temp;
 //        cin>>temp;
 //
+//        num.push_back(temp);
 //        Student s;
-//        s.rank=temp;
-//        s.count=1;
-//        for(int j=0;j<v.size();j++){
-//        if(temp == v[j].rank){
-//        s.count = v[j].count;
-//        s.count+=1;
-//        v.erase(v.begin()+j);
-//        break;
-//        }
-//        }
-//        v.push_back(s);
+//        s.setRank(temp);
+//        set.insert(s);
 //        }
 //
-//        for(int i=0;i<v.size();i++){
-//        int result=0;
-//        cout<<"i: "<<i<<endl;
-//        for (int j=0;j<v.size();j++){
-//        cout<<"   j: "<<j;
-//        if(v[i].rank == v[j].rank)
-//        result+=C(2,v[j].count-1);
-//        else
-//        result+=C(2,v[j].count);
-//        cout<<"=> result: "<<result<<endl;
+//        for(Student item:set){
+//        int count = std::count(num.begin(), num.end(),item.getRank());
+//        item.setCount(count);
 //        }
 //
-//        cout<<"====final result: "<<result<<endl;
+//        for(int i:num){
+//        for (Student item:set){
+//        if(i==item.getRank()){
+//        if(item.getIsCal()==0){
+//        item.setResult(calResult(set,i));
+//        item.setIsCal(1);
+//        cout<<"rank: "<<item.getRank()<<" ,count: "<<item.getCount()<<" ,result: "<<item.getResult()<<" ,isCal: "<<item.getIsCal()<<endl;
 //        }
-//
+//        cout<<item.getResult()<<endl;
 //        }
-
-
+//        }
+//        }
+//        }
